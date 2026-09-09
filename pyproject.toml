@@ -1,0 +1,19 @@
+[project]
+name = "omi7510"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [
+    { name = "glall1", email = "glall1@babson.edu" }
+]
+requires-python = ">=3.14"
+dependencies = [
+    "marimo>=0.24.0",
+]
+
+[project.scripts]
+omi7510 = "omi7510:main"
+
+[build-system]
+requires = ["uv_build>=0.12.11,<0.13.0"]
+build-backend = "uv_build"
