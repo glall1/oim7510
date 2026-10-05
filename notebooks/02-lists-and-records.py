@@ -250,13 +250,13 @@ def _(mo):
     it, write under the letter, and press `Ctrl+Enter`. Code still goes in cells of your
     own, added with the **+** button.
 
-    **A ·**
+    **A ·** The first test that is true decides. Once one branch of an if/elif chain runs, Python skips the rest, so the larger threshold has to go first.
 
-    **C ·**
+    **C ·** append always adds exactly one item. If you hand it a list, that whole list becomes a single item, so the order ends up with 3 lines, not 4.
 
-    **D ·**
+    **D ·** .sort() changes the list in place and returns None, so printing it shows None. sorted() leaves the original alone and returns a new sorted list.
 
-    **E ·**
+    **E ·** When you want a change made through one name to show up everywhere that list is used, like a shared price list that several parts of the code should all see updated.
     """)
     return
 
