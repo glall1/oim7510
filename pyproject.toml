@@ -11,6 +11,7 @@ dependencies = [
     "httpx>=0.28.1",
     "marimo[recommended]>=0.24.0",
     "matplotlib>=3.11.2",
+    "requests>=2.34.2",
 ]
 
 [project.scripts]
