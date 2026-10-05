@@ -638,6 +638,17 @@ def _(orders):
     return
 
 
+@app.cell
+def _(orders):
+    total_freight = 0
+
+    for order in orders:
+        total_freight = total_freight + order["Freight"]
+
+    total_freight
+    return
+
+
 @app.cell(hide_code=True)
 def _(mo):
     mo.md(r"""
@@ -660,6 +671,18 @@ def _(mo):
     return
 
 
+@app.cell
+def _(orders):
+    no_shipped_date = 0
+
+    for current_order in orders:
+        if current_order["ShippedDate"] is None:
+            no_shipped_date = no_shipped_date + 1
+
+    no_shipped_date
+    return
+
+
 @app.cell(hide_code=True)
 def _(mo):
     mo.md(r"""
@@ -674,6 +697,29 @@ def _(mo):
     Then check it: if a row were what you just wrote, **how many rows would this table
     have?** Does that match 30?
     """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md(r"""
+    One row is a single customer order placed with the company.
+    """)
+    return
+
+
+@app.cell
+def _(orders):
+    largest_freight = 0
+    largest_order_id = 0
+
+    for largest_order in orders:
+        if largest_order["Freight"] > largest_freight:
+            largest_freight = largest_order["Freight"]
+            largest_order_id = largest_order["OrderID"]
+
+    print(largest_order_id)
+    print(largest_freight) 
     return
 
 
@@ -721,6 +767,26 @@ def _():
         {"Symbol": "TSLA", "Shares": 150, "Price": 255.70},
     ]
     portfolio
+    return (portfolio,)
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md(r"""
+    For each holding, multiply the number of shares by the price per share to find the cost of that holding. Then add the cost of all six holdings together to find the total cost of the portfolio. Round the final amount to two decimal places.
+    """)
+    return
+
+
+@app.cell
+def _(portfolio):
+    portfolio_total = 0
+
+    for holding in portfolio:
+        holding_cost = holding["Shares"] * holding["Price"]
+        portfolio_total = portfolio_total + holding_cost
+
+    portfolio_total 
     return
 
 
