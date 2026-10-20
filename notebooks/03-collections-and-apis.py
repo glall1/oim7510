@@ -10,7 +10,7 @@
 
 import marimo
 
-__generated_with = "0.25.1"
+__generated_with = "0.25.2"
 app = marimo.App(width="medium", sql_output="polars")
 
 
@@ -242,9 +242,9 @@ def _(closing_prices):
 def _(closing_prices):
     above_200 = []
 
-    for ticker in closing_prices:
-        if closing_prices[ticker] > 200:
-            above_200.append(ticker)
+    for _ticker in closing_prices:
+        if closing_prices[_ticker] > 200:
+            above_200.append(_ticker)
 
     above_200
     return
@@ -500,6 +500,17 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md(r"""
+    1. List — because the customer can add, remove, and reorder the lines.
+    2. Set — because each customer should appear only once.
+    3. Dictionary — because the units sold are looked up by product name.
+    4. Tuple — because the shipment information should not change once recorded.
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md(r"""
     ## ✏️ D · The portfolio again
 
     Notebook 2 held the six holdings as a list of dictionaries. Here they are as a list of tuples, one holding per tuple.
@@ -515,6 +526,34 @@ def _(mo):
     return
 
 
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md(r"""
+    I would rather use a list of dictionaries because the names make it easier to understand what each value represents.
+    """)
+    return
+
+
+@app.cell
+def _(holdings):
+    portfolio_total = 0
+
+    for _symbol, _shares, _price in holdings:
+        holding_cost = _shares * _price
+        portfolio_total = portfolio_total + holding_cost
+
+    round(portfolio_total, 2) 
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md(r"""
+    The line for _symbol, _shares, _price in holdings: unpacks each holding into three separate values: the symbol, number of shares, and price.
+    """)
+    return
+
+
 @app.cell
 def _():
     holdings = [
@@ -526,7 +565,7 @@ def _():
         ("TSLA", 150, 255.70),
     ]
     holdings
-    return
+    return (holdings,)
 
 
 @app.cell(hide_code=True)
@@ -545,6 +584,50 @@ def _(mo):
     return
 
 
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md(r"""
+    For each ticker, I would keep track of the shares purchased, the purchase price, and the order they were bought. When shares are sold, I would use the oldest shares first and continue until the number of shares being sold is reached.
+    """)
+    return
+
+
+@app.cell
+def _(year_trades):
+    lots = {}
+    gains = []
+
+    for date, ticker, action, shares, price in year_trades:
+        if ticker not in lots:
+            lots[ticker] = []
+
+        if action == "buy":
+            lots[ticker].append([shares, price])
+
+        elif action == "sell":
+            shares_to_sell = shares
+            gain = 0
+
+            while shares_to_sell > 0:
+                old_shares, old_price = lots[ticker][0]
+                shares_used = min(shares_to_sell, old_shares)
+
+                gain = gain + shares_used * (price - old_price)
+
+                old_shares = old_shares - shares_used
+                shares_to_sell = shares_to_sell - shares_used
+
+                if old_shares == 0:
+                    lots[ticker].pop(0)
+                else:
+                    lots[ticker][0][0] = old_shares
+
+            gains.append((ticker, gain))
+
+    gains, lots   
+    return
+
+
 @app.cell
 def _():
     year_trades = [
@@ -558,7 +641,7 @@ def _():
         ("2026-08-12", "AAPL", "sell", 40, 250.00),
     ]
     year_trades
-    return
+    return (year_trades,)
 
 
 @app.cell(hide_code=True)
@@ -720,11 +803,39 @@ def _(mo):
     return
 
 
+@app.cell
+def _(babson_weather):
+    wind_speed = babson_weather["current"]["wind_speed_10m"]
+    wind_unit = babson_weather["current_units"]["wind_speed_10m"]
+
+    f"The wind speed is {wind_speed} {wind_unit}."
+    return
+
+
 @app.cell(hide_code=True)
 def _(mo):
     mo.md(r"""
     **F · Another town.** Search for `Wellesley` the way the misspelled search did, with the correct spelling. Take the first place out of `results`, then its `latitude`, `longitude` and `admin1`. *Check yourself: latitude 42.29649, in Massachusetts.*
     """)
+    return
+
+
+@app.cell
+def _(requests):
+    wellesley_url = (
+        "https://geocoding-api.open-meteo.com/v1/search"
+        "?name=Wellesley"
+        "&count=10"
+        "&language=en"
+        "&format=json"
+    )
+
+    wellesley_reply = requests.get(wellesley_url, timeout=10)
+    wellesley_results = wellesley_reply.json()["results"]
+
+    wellesley = wellesley_results[0]
+
+    wellesley["latitude"], wellesley["longitude"], wellesley["admin1"]
     return
 
 
@@ -741,8 +852,65 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md(r"""
+    The first result is Babson Park in Florida, not Massachusetts. If the code always takes [0], it would automatically select the first location even if it is the wrong one. This is why we should check the state before using the result.
+    """)
+    return
+
+
+@app.cell
+def _(requests):
+    babson_park_url = (
+        "https://geocoding-api.open-meteo.com/v1/search"
+        "?name=Babson%20Park"
+        "&count=10"
+        "&language=en"
+        "&format=json"
+    )
+
+    babson_park_reply = requests.get(babson_park_url, timeout=10)
+    babson_park_results = babson_park_reply.json()["results"]
+
+    babson_park = babson_park_results[0]
+
+    babson_park
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md(r"""
     > **Advanced · H · A week of forecasts.** Add `&daily=temperature_2m_max,temperature_2m_min` to the Babson address. The `daily` part of the reply holds three lists side by side: dates, highs and lows, matched by position. [Python §19](/handbooks/python/02-collections/#19-choosing-a-data-structure) shows how that shape goes wrong. Turn it into a list of dictionaries, one per day, each with a date, a high and a low.
     """)
+    return
+
+
+@app.cell
+def _(requests):
+    weekly_url = (
+        "https://api.open-meteo.com/v1/forecast"
+        "?latitude=42.2987&longitude=-71.2595"
+        "&daily=temperature_2m_max,temperature_2m_min"
+        "&temperature_unit=fahrenheit"
+        "&timezone=America/New_York"
+    )
+
+    weekly_reply = requests.get(weekly_url, timeout=10)
+    daily = weekly_reply.json()["daily"]
+
+    week_forecast = []
+
+    for forecast_date, forecast_high, forecast_low in zip(
+        daily["time"],
+        daily["temperature_2m_max"],
+        daily["temperature_2m_min"],
+    ):
+        week_forecast.append({
+            "date": forecast_date,
+            "high": forecast_high,
+            "low": forecast_low
+        })
+
+    week_forecast
     return
 
 
@@ -750,6 +918,34 @@ def _(mo):
 def _(mo):
     mo.md(r"""
     > **Advanced · I · A second API.** Kraken, a cryptocurrency exchange, publishes prices with no key: `https://api.kraken.com/0/public/Ticker?pair=XBTUSD`. Request it, then change the pair to `XBTUSX`. Compare the status code and the reply with Open-Meteo's misspelled search. Both answer 200 to a request that failed, and each shows the failure in its own way.
+    """)
+    return
+
+
+@app.cell
+def _(requests):
+    kraken_url = "https://api.kraken.com/0/public/Ticker?pair=XBTUSD"
+
+    kraken_reply = requests.get(kraken_url, timeout=10)
+
+    kraken_reply.status_code, kraken_reply.json()
+    return
+
+
+@app.cell
+def _(requests):
+    kraken_bad_url = "https://api.kraken.com/0/public/Ticker?pair=XBTUSX"
+
+    kraken_bad_reply = requests.get(kraken_bad_url, timeout=10)
+
+    kraken_bad_reply.status_code, kraken_bad_reply.json()
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md(r"""
+    Both requests can return a status code of 200, even when the request fails. The Kraken response shows the error in the data returned by the API rather than through the status code.
     """)
     return
 
