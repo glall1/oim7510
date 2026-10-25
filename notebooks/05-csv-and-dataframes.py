@@ -448,6 +448,18 @@ def _(mo):
     return
 
 
+@app.cell
+def _(pl, town_table):
+
+    town_table.filter(
+        pl.col("average_single_family_value_dollars") >= 2_000_000
+    ).group_by("county").agg(
+        pl.len().alias("towns")
+    ).sort("towns", descending=True)
+
+    return
+
+
 @app.cell(hide_code=True)
 def _(mo):
     mo.md(r"""
