@@ -555,6 +555,19 @@ def _(mo):
     return
 
 
+@app.cell
+def _(requests):
+    hello_reply = requests.post(
+        "https://oim.zhili.dev/message",
+        headers={"x-token": "glall1"},
+        json={"message": "Hello from Gabby!"},
+        timeout=10,
+    )
+
+    hello_reply.status_code, hello_reply.json()
+    return
+
+
 @app.cell(hide_code=True)
 def _(mo):
     mo.md(r"""
@@ -578,6 +591,59 @@ def _(mo):
     3. Delete the `headers=` line and run it again. In a markdown cell under it, answer: what did the server answer, and why does it need to know who sent a message?
 
     **Going further.** Post something more useful than one town's bill: choose a question somebody would ask, answer it from live data, and post the answer, in 140 characters or fewer.
+    """)
+    return
+
+
+@app.cell
+def _(requests):
+
+
+    town_reply = requests.get(
+        "https://oim.zhili.dev/ma/towns",
+        params={"name": "Wellesley"},
+        timeout=10,
+    )
+
+    town_name = town_reply.json()["items"][0]["name"]
+    town_bill = town_reply.json()["items"][0]["average_single_family_bill_dollars"]
+
+    town_name, town_bill
+    return town_bill, town_name
+
+
+@app.cell
+def _(requests, town_bill, town_name):
+
+
+    board_reply = requests.post(
+        "https://oim.zhili.dev/message",
+        headers={"x-token": "glall1"},
+        json={"message": f"{town_name}: ${town_bill:,}"},
+        timeout=10,
+    )
+
+    board_reply.status_code, board_reply.json()
+    return
+
+
+@app.cell
+def _(requests, town_bill, town_name):
+
+    no_header_reply = requests.post(
+        "https://oim.zhili.dev/message",
+        json={"message": f"{town_name}: ${town_bill:,}"},
+        timeout=10,
+    )
+
+    no_header_reply.status_code, no_header_reply.json()
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md(r"""
+    When I removed the `x-token` header, the server returned a 401 status code with the message "Missing x-token header." This happened because the server needs to identify who is sending the message before allowing it to be posted. Without the header, the server cannot verify the sender, so it rejects the request.
     """)
     return
 
