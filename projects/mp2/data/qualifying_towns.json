@@ -1,0 +1,98 @@
+[
+  {
+    "name": "Malden",
+    "dor_code": "165",
+    "fiscal_year": 2026,
+    "average_value": 434420,
+    "average_tax": 4952,
+    "tax_rate": 11.4
+  },
+  {
+    "name": "Waltham",
+    "dor_code": "308",
+    "fiscal_year": 2026,
+    "average_value": 502825,
+    "average_tax": 5189,
+    "tax_rate": 10.32
+  },
+  {
+    "name": "Dracut",
+    "dor_code": "079",
+    "fiscal_year": 2026,
+    "average_value": 593296,
+    "average_tax": 5737,
+    "tax_rate": 9.67
+  },
+  {
+    "name": "Lowell",
+    "dor_code": "160",
+    "fiscal_year": 2026,
+    "average_value": 514854,
+    "average_tax": 5844,
+    "tax_rate": 11.35
+  },
+  {
+    "name": "Everett",
+    "dor_code": "093",
+    "fiscal_year": 2026,
+    "average_value": 466504,
+    "average_tax": 5887,
+    "tax_rate": 12.62
+  },
+  {
+    "name": "Ashby",
+    "dor_code": "012",
+    "fiscal_year": 2026,
+    "average_value": 394983,
+    "average_tax": 6225,
+    "tax_rate": 15.76
+  },
+  {
+    "name": "Marlborough",
+    "dor_code": "170",
+    "fiscal_year": 2026,
+    "average_value": 611100,
+    "average_tax": 6441,
+    "tax_rate": 10.54
+  },
+  {
+    "name": "Townsend",
+    "dor_code": "299",
+    "fiscal_year": 2026,
+    "average_value": 469723,
+    "average_tax": 6459,
+    "tax_rate": 13.75
+  },
+  {
+    "name": "Shirley",
+    "dor_code": "270",
+    "fiscal_year": 2026,
+    "average_value": 523807,
+    "average_tax": 6490,
+    "tax_rate": 12.39
+  },
+  {
+    "name": "Ayer",
+    "dor_code": "019",
+    "fiscal_year": 2026,
+    "average_value": 571644,
+    "average_tax": 6625,
+    "tax_rate": 11.59
+  },
+  {
+    "name": "Billerica",
+    "dor_code": "031",
+    "fiscal_year": 2026,
+    "average_value": 644586,
+    "average_tax": 7484,
+    "tax_rate": 11.61
+  },
+  {
+    "name": "Pepperell",
+    "dor_code": "232",
+    "fiscal_year": 2026,
+    "average_value": 549948,
+    "average_tax": 7578,
+    "tax_rate": 13.78
+  }
+]

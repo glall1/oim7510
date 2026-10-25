@@ -267,19 +267,17 @@ def _(budget_dollars, county, fiscal_year, ranked_towns, tax_limit_dollars):
     print(f"Annual property tax limit: Under ${tax_limit_dollars:,}")
     print()
 
-    print(f'{"Rank":<6} {"Municipality":<20} {"Avg. Home Value":>18} {"Avg. Tax Bill":>16}')
-    print("-" * 65)
+    print("Rank | Municipality | Avg Home Value | Tax Rate | Avg Tax Bill")
+    print("-" * 75)
 
-    rank = 1
-
-    for _town in ranked_towns:
+    for _rank, _town in enumerate(ranked_towns, start=1):
         print(
-            f'{rank:<6} '
-            f'{_town["name"]:<20} '
-            f'${_town["average_value"]:>17,} '
-            f'${_town["average_tax"]:>15,}'
+            f'{_rank} | '
+            f'{_town["name"]} | '
+            f'${_town["average_value"]:,} | '
+            f'${_town["tax_rate"]:.2f} | '
+            f'${_town["average_tax"]:,}'
         )
-        rank += 1
 
     print()
     print(
@@ -369,6 +367,88 @@ def _(mo):
 
     If I reduce the maximum home value from $700,000 to $500,000, I predict that fewer municipalities will qualify because some of the original 12 have average home values above $500,000.
     """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md(r"""
+    ### What happened when I tested it
+
+    After changing the maximum average home value from $700,000 to $500,000, the number of qualifying municipalities decreased from 12 to 4. The remaining municipalities were Malden, Everett, Ashby, and Townsend.
+
+    This matched my prediction that fewer municipalities would qualify when I lowered the budget. It also showed me that changing one input can affect the final results without having to rewrite the filtering code.
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md(r"""
+    ## 9. Going Further
+
+    I wanted to estimate how much property tax the couple might pay if they purchased a home assessed at exactly $700,000 in each qualifying municipality, instead of using the municipality's average tax bill.
+
+    To do this, I used the residential property tax rate per $1,000 of assessed value. This is an estimate, and the actual tax bill may differ depending on the property's assessment and any applicable exemptions.
+    """)
+    return
+
+
+@app.cell
+def _(ranked_towns):
+    print("Municipality | Estimated Tax on $700,000")
+
+    for _town in ranked_towns:
+        if _town["tax_rate"] is not None:
+            _estimated_tax = 700 * float(_town["tax_rate"])
+            print(_town["name"], "|", f"${_estimated_tax:,.2f}")
+
+
+
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md(r"""
+    ### What I Learned
+
+    I found that the estimated property tax on a $700,000 home can be different from the average property tax bill reported for each municipality. For example, Malden's estimated tax was $7,980, while Ashby's was $11,032.
+
+    This showed me why it is important to consider the residential tax rate when comparing towns. Even if a municipality meets the original budget requirements based on average values, the taxes on a specific property could be higher.
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md(r"""
+    ## 10. Time Spent
+
+    I spent approximately 4 hours completing this project. This included planning, collecting information from the API, debugging the pagination, filtering and ranking municipalities, verifying the results, and testing a different budget.
+    """)
+    return
+
+
+@app.cell
+def _(all_towns, ranked_towns, tax_records):
+    import json
+    from pathlib import Path
+
+    data_folder = Path("projects/mp2/data")
+    data_folder.mkdir(parents=True, exist_ok=True)
+
+    with open(data_folder / "middlesex_towns.json", "w") as file:
+        json.dump(all_towns, file, indent=2)
+
+    with open(data_folder / "middlesex_tax_2026.json", "w") as file:
+        json.dump(tax_records, file, indent=2)
+
+    with open(data_folder / "qualifying_towns.json", "w") as file:
+        json.dump(ranked_towns, file, indent=2)
+
+    print("Data saved successfully!")
+    print("Folder:", data_folder)
     return
 
 
