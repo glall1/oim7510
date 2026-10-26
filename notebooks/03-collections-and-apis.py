@@ -183,13 +183,17 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md(r"""
-    B · France, Germany, Brazil, and the USA had the most orders, with 4 orders each.
+    **B ·** France, Germany, Brazil, and the USA had the most orders, with 4 orders each.
 
-    C ·
+    **C ·**
+    1. List — because the customer can add, remove, and reorder the lines.
+    2. Set — because each customer should appear only once.
+    3. Dictionary — because units sold are looked up by product name.
+    4. Tuple — because the shipment information should not change once recorded.
 
-    D ·
+    **D ·** I would rather use a list of dictionaries because the names make it easier to understand what each value represents.
 
-    G ·
+    **G ·** The first Babson Park result refers to Florida, not Massachusetts. Using [0] without checking the location could give the wrong result.
     """)
     return
 
