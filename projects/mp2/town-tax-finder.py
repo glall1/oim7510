@@ -248,7 +248,6 @@ def _(qualifying_towns):
     )
 
     ranked_towns
-
     return (ranked_towns,)
 
 
@@ -342,7 +341,14 @@ def _(mo):
     I adjusted the code to retrieve the remaining page and then checked that the number of records matched the API's total. I also verified Malden's 2026 home value and property tax bill directly from its historical record instead of relying only on the final results.
 
     This helped me understand why checking the data is just as important as getting the code to run.
+
+    For evidence of my development process, see my GitHub commits mp2: plan before AI and mp2: prediction, which document my initial planning and prediction test.
     """)
+    return
+
+
+@app.cell
+def _():
     return
 
 
@@ -402,7 +408,6 @@ def _(ranked_towns):
         if _town["tax_rate"] is not None:
             _estimated_tax = 700 * float(_town["tax_rate"])
             print(_town["name"], "|", f"${_estimated_tax:,.2f}")
-
 
 
     return
