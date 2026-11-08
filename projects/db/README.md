@@ -86,6 +86,14 @@ The database contains five tables:
 - **EXPENSES:** Spending associated with projects.
 
 ### Entity Relationship Diagram
+### Database Components
+| Color | Table | Business Function |
+|---|---|---|
+| 🔵 | PEOPLE | Employee management |
+| 🟢 | PROJECTS | Project management |
+| 🟣 | PROJECT_ASSIGNMENTS | Project staffing |
+| 🟠 | TASKS | Task tracking |
+| 🔴 | EXPENSES | Financial tracking |
 
 ```mermaid
 erDiagram
@@ -179,6 +187,38 @@ This reduces duplication and allows managers to analyze employee workloads acros
 ---
 
 ## 4. Design Choices
+
+### 1. Why did I choose these five tables?
+
+I chose PEOPLE, PROJECTS, PROJECT_ASSIGNMENTS, TASKS, and EXPENSES because they represent the main information BabsonAI Labs needs to manage its operations.
+
+Together, these tables connect employees to projects, track the work being completed, and record project spending.
+
+### 2. Why does PROJECT_ASSIGNMENTS need its own table?
+
+Employees can work on multiple projects, and each project can have multiple employees.
+
+PROJECT_ASSIGNMENTS connects these two tables without duplicating employee or project information.
+
+It also stores information specific to each assignment, such as the employee's project role and weekly committed hours.
+
+### 3. How do primary and foreign keys support the design?
+
+Primary keys uniquely identify records, while foreign keys establish relationships between tables.
+
+For example, TASKS uses project_id to identify the project a task belongs to and assigned_person_id to identify the employee responsible for it.
+
+These relationships help maintain consistent information across the database.
+
+### 4. What design trade-offs did I make?
+
+I kept the database focused on five tables rather than creating separate tables for clients, expense categories, or project statuses.
+
+This makes the initial design easier to understand and implement.
+
+One limitation is that the database does not track detailed employee timesheets or labor costs, so financial analysis focuses on recorded project expenses.
+
+The design also allows tasks to be unassigned, reflecting how work may be created before an employee is selected.
 
 ---
 
