@@ -309,7 +309,6 @@ def _(database, duckdb):
             _results.append((_label, str(_error).splitlines()[0]))
 
     _results
-
     return
 
 
@@ -359,7 +358,6 @@ def _(ask):
         ORDER BY average_single_family_bill_dollars DESC
         LIMIT 5
     """)
-
     return
 
 
