@@ -1,0 +1,26 @@
+person_id,first_name,last_name,work_email,title,start_date,manager_id
+1,Alex,Chen,alex.chen@babsonailabs.example,Co-Founder,2024-06-21,
+2,Jordan,Patel,jordan.patel@babsonailabs.example,Co-Founder,2022-08-28,
+3,Taylor,Rivera,taylor.rivera@babsonailabs.example,AI Engineer,2022-07-05,1
+4,Morgan,Johnson,morgan.johnson@babsonailabs.example,Data Scientist,2022-06-21,1
+5,Casey,Kim,casey.kim@babsonailabs.example,Project Manager,2023-04-30,1
+6,Riley,Williams,riley.williams@babsonailabs.example,AI Engineer,2022-02-02,3
+7,Avery,Brown,avery.brown@babsonailabs.example,Data Scientist,2025-06-30,4
+8,Cameron,Garcia,cameron.garcia@babsonailabs.example,Business Analyst,2024-08-07,2
+9,Quinn,Lee,quinn.lee@babsonailabs.example,AI Engineer,2023-01-10,6
+10,Parker,Martin,parker.martin@babsonailabs.example,AI Engineer,2022-01-30,5
+11,Jamie,Thompson,jamie.thompson@babsonailabs.example,Software Developer,2023-05-27,1
+12,Drew,Davis,drew.davis@babsonailabs.example,Data Scientist,2025-01-13,4
+13,Reese,Wilson,reese.wilson@babsonailabs.example,AI Engineer,2025-05-16,6
+14,Skyler,Anderson,skyler.anderson@babsonailabs.example,AI Engineer,2024-11-20,5
+15,Hayden,Clark,hayden.clark@babsonailabs.example,AI Engineer,2023-07-07,5
+16,Blake,Lewis,blake.lewis@babsonailabs.example,AI Engineer,2025-08-13,3
+17,Emerson,Walker,emerson.walker@babsonailabs.example,Software Developer,2023-12-29,3
+18,Rowan,Hall,rowan.hall@babsonailabs.example,Data Analyst,2025-09-04,2
+19,Finley,Allen,finley.allen@babsonailabs.example,Software Developer,2024-12-21,6
+20,Dakota,Young,dakota.young@babsonailabs.example,AI Engineer,2024-11-06,1
+21,Charlie,King,charlie.king@babsonailabs.example,AI Engineer,2023-11-15,2
+22,Sage,Scott,sage.scott@babsonailabs.example,Data Scientist,2024-08-26,6
+23,Logan,Green,logan.green@babsonailabs.example,Software Developer,2022-12-09,1
+24,Harper,Baker,harper.baker@babsonailabs.example,AI Engineer,2025-04-18,4
+25,Elliot,Adams,elliot.adams@babsonailabs.example,Data Analyst,2022-06-04,5

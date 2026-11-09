@@ -1,0 +1,69 @@
+project_id,person_id,project_role,hours_per_week,joined_date
+1,19,Technical Advisor,5,2026-07-06
+1,9,Project Lead,26,2026-07-06
+1,5,Analyst,4,2026-07-06
+1,24,Developer,3,2026-07-06
+1,11,Analyst,33,2026-07-06
+2,23,Project Lead,38,2026-04-29
+2,11,Developer,5,2026-04-29
+2,10,Technical Advisor,13,2026-04-29
+2,15,Project Lead,26,2026-04-29
+3,23,Analyst,33,2026-01-18
+3,15,Technical Advisor,12,2026-01-18
+3,17,Analyst,20,2026-01-18
+3,8,Project Lead,23,2026-01-18
+3,12,Analyst,32,2026-01-18
+4,16,Project Lead,21,2026-01-24
+4,11,Analyst,1,2026-01-24
+4,5,Project Lead,6,2026-01-24
+4,23,Analyst,14,2026-01-24
+4,2,Project Lead,28,2026-01-24
+4,20,Technical Advisor,21,2026-01-24
+4,6,Analyst,25,2026-01-24
+4,22,Developer,35,2026-01-24
+5,14,Project Lead,17,2026-02-15
+5,11,Developer,27,2026-02-15
+5,22,Technical Advisor,37,2026-02-15
+5,19,Developer,34,2026-02-15
+5,5,Project Lead,25,2026-02-15
+5,18,Developer,14,2026-02-15
+6,23,Analyst,32,2026-06-06
+6,19,Analyst,25,2026-06-06
+6,13,Developer,1,2026-06-06
+6,2,Project Lead,31,2026-06-06
+6,12,Technical Advisor,20,2026-06-06
+6,15,Technical Advisor,31,2026-06-06
+7,13,Developer,39,2026-06-19
+7,21,Developer,14,2026-06-19
+7,16,Analyst,34,2026-06-19
+7,6,Technical Advisor,31,2026-06-19
+7,10,Project Lead,30,2026-06-19
+8,1,Analyst,38,2026-06-05
+8,12,Developer,23,2026-06-05
+8,16,Developer,20,2026-06-05
+8,3,Developer,37,2026-06-05
+9,19,Analyst,22,2026-05-27
+9,7,Developer,21,2026-05-27
+9,17,Technical Advisor,18,2026-05-27
+9,9,Project Lead,34,2026-05-27
+9,3,Project Lead,16,2026-05-27
+9,18,Developer,24,2026-05-27
+10,1,Analyst,21,2026-07-07
+10,13,Developer,28,2026-07-07
+10,2,Project Lead,20,2026-07-07
+10,22,Developer,32,2026-07-07
+10,7,Analyst,23,2026-07-07
+11,3,Analyst,31,2026-02-13
+11,21,Technical Advisor,9,2026-02-13
+11,1,Project Lead,10,2026-02-13
+11,22,Analyst,11,2026-02-13
+11,19,Technical Advisor,21,2026-02-13
+11,11,Analyst,36,2026-02-13
+11,24,Technical Advisor,3,2026-02-13
+11,8,Developer,5,2026-02-13
+12,25,Project Lead,21,2026-02-05
+12,22,Analyst,40,2026-02-05
+12,14,Analyst,23,2026-02-05
+12,2,Technical Advisor,38,2026-02-05
+12,20,Technical Advisor,4,2026-02-05
+12,21,Project Lead,29,2026-02-05

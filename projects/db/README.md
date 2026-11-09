@@ -188,37 +188,21 @@ This reduces duplication and allows managers to analyze employee workloads acros
 
 ## 4. Design Choices
 
-### 1. Why did I choose these five tables?
+### 1. Which key did I choose, and why?
 
-I chose PEOPLE, PROJECTS, PROJECT_ASSIGNMENTS, TASKS, and EXPENSES because they represent the main information BabsonAI Labs needs to manage its operations.
+I used `person_id` as the primary key for PEOPLE instead of work email. The scenario says employees' email addresses may change, so a unique ID provides a more stable way to identify each employee.
 
-Together, these tables connect employees to projects, track the work being completed, and record project spending.
+### 2. Which relationships are optional?
 
-### 2. Why does PROJECT_ASSIGNMENTS need its own table?
+Some relationships are optional because of how the business operates. The two founders do not report to a manager, internal projects do not need a client, and new tasks may not yet have an assigned employee. A project may also have no recorded expenses.
 
-Employees can work on multiple projects, and each project can have multiple employees.
+### 3. Which rule cannot be enforced by a simple column constraint?
 
-PROJECT_ASSIGNMENTS connects these two tables without duplicating employee or project information.
+The rule that a task's assigned employee must work on that task's project requires checking multiple tables. I use a SQL query to compare TASKS with PROJECT_ASSIGNMENTS and identify assignments that violate this rule.
 
-It also stores information specific to each assignment, such as the employee's project role and weekly committed hours.
+### 4. What did I check in the AI-generated ERD?
 
-### 3. How do primary and foreign keys support the design?
-
-Primary keys uniquely identify records, while foreign keys establish relationships between tables.
-
-For example, TASKS uses project_id to identify the project a task belongs to and assigned_person_id to identify the employee responsible for it.
-
-These relationships help maintain consistent information across the database.
-
-### 4. What design trade-offs did I make?
-
-I kept the database focused on five tables rather than creating separate tables for clients, expense categories, or project statuses.
-
-This makes the initial design easier to understand and implement.
-
-One limitation is that the database does not track detailed employee timesheets or labor costs, so financial analysis focuses on recorded project expenses.
-
-The design also allows tasks to be unassigned, reflecting how work may be created before an employee is selected.
+I checked that PROJECT_ASSIGNMENTS connects PEOPLE and PROJECTS through a many-to-many relationship. I also checked that TASKS allows an unassigned employee while still requiring every task to belong to a project.
 
 ---
 
