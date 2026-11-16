@@ -28,7 +28,7 @@ def _(mo):
     mo.md(r"""
     ### My Prediction
 
-    I predict that joining PROJECTS, TASKS, and EXPENSES will produce several thousand rows before grouping. This is because each task can be matched with every expense belonging to the same project. For example, a project with 5 tasks and 3 expenses would produce 15 rows.
+    I think joining PROJECTS, TASKS, and EXPENSES will result in a few thousand rows before grouping. This is because each task can be matched with multiple expenses within the same project, which increases the number of rows. For example, if a project has 5 tasks and 3 expenses, the join would produce 15 rows.
     """)
     return
 
